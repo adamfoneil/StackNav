@@ -1,0 +1,16 @@
+﻿@page "/"
+@inject BreadcrumbNavigation Breadcrumb
+
+<PageTitle>Index</PageTitle>
+
+<button class="btn btn-primary" @onclick="@(() => Breadcrumb.GoTo("New Page", "/NewPage"))">New Page</button>
+
+<button class="btn btn-primary" @onclick="@(() => Breadcrumb.GoTo("Another Page", "/AnotherPage"))">Another</button>
+
+@code {
+	protected override void OnInitialized()
+	{
+		Breadcrumb.Push("Home", "/");
+		StateHasChanged();
+	}	
+}

@@ -1,0 +1,48 @@
+﻿@using StackNav.Blazor.Services;
+@inherits LayoutComponentBase
+@inject BreadcrumbNavigation Breadcrumb
+@implements IDisposable
+
+<PageTitle>StackNav.Blazor</PageTitle>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4 d-flex justify-content-between">
+            <div class="d-flex align-items-center">
+
+                @if (Breadcrumb.AllowGoBack)
+                {
+                    <button class="btn-primary" @onclick="() => Breadcrumb.GoBack()">&lt;&lt;</button>
+                }
+
+                @foreach (var item in Breadcrumb.PathNames)
+                {
+                    <div class="mx-2">/</div>
+                    <div>@item</div>
+                }
+            </div>
+
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Breadcrumb.PathModified += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        Breadcrumb.PathModified -= StateHasChanged;
+    }
+}
