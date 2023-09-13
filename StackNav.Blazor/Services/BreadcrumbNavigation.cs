@@ -12,7 +12,7 @@ public class BreadcrumbNavigation
 
 	public event Action? PathModified;
 
-	private const string CacheKey = "stack";
+	private const string CacheKey = "stack"; // needs to be user-isolated
 
 	public BreadcrumbNavigation(NavigationManager navigationManager, IDistributedCache cache)
 	{
