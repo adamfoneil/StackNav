@@ -19,6 +19,7 @@ public class BreadcrumbNavigation
 		NavigationManager = navigationManager;
 		Cache = cache;
 		Path = cache.GetItem<Stack<NavEntry>>(CacheKey) ?? new();
+		Push("Home", "/");
 	}
 
 	public bool AllowGoBack => Path.Count > 1;
